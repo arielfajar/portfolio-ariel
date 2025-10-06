@@ -569,7 +569,7 @@ export default {
         {
           title: 'Kegiatan Magang Mahasiswa',
           company: 'PT Jababeka Tbk',
-          period: 'Feb 2025 - Mar 2025',
+          period: 'Jan 2025 - Feb 2025',
           description: 'During this program, I successfully:',
           achievements: [
             'Deploying and integrating the website to be publicly accessible',
