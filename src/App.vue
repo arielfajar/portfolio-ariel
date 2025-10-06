@@ -569,7 +569,7 @@ export default {
         {
           title: 'Kegiatan Magang Mahasiswa',
           company: 'PT Jababeka Tbk',
-          period: 'Feb 2025 - Mar 2025',
+          period: 'Jan 2025 - Feb 2025',
           description: 'During this program, I successfully:',
           achievements: [
             'Deploying and integrating the website to be publicly accessible',
@@ -740,7 +740,7 @@ export default {
         // Ganti dengan credentials Anda
         await emailjs.send(
           'service_sa69l58',      // Service ID Anda
-          'template_ycyzcwy',     // Template ID Anda  
+          '  ',     // Template ID Anda  
           templateParams,
           'eTFDsabna1YryLWcv'       // Public Key Anda
         );
