@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-white text-[#101828] font-['Inter']">
+  <div class="min-h-screen bg-white text-[#101828] font-['Inter'] overflow-x-hidden">
     <!-- Navbar -->
     <header class="bg-white/95 backdrop-blur border-b border-[#E3E6EA] sticky top-0 z-50">
       <nav class="max-w-6xl mx-auto flex justify-between items-center px-4 py-4">
@@ -22,28 +22,41 @@
         <a href="#contact" class="hidden md:inline-flex px-4 py-2 bg-[#101828] text-white rounded-lg text-sm font-medium hover:bg-[#2451B8] transition-colors duration-300">
           Let's talk
         </a>
-        <button class="md:hidden text-[#101828]" @click="toggleMobileMenu">
-          <i class="fas fa-bars text-xl"></i>
+        <button
+          class="md:hidden text-[#101828] p-2 -mr-2 rounded-lg hover:bg-[#F7F8FA] transition-colors"
+          aria-label="Toggle menu"
+          @click="toggleMobileMenu"
+        >
+          <i :class="mobileMenuOpen ? 'fas fa-times' : 'fas fa-bars'" class="text-xl"></i>
         </button>
       </nav>
 
       <!-- Mobile Menu -->
-      <div v-if="mobileMenuOpen" class="md:hidden bg-white py-4 px-4 border-t border-[#E3E6EA]">
-        <ul class="space-y-3 text-[#475467] font-medium">
-          <li><a href="#about" class="block py-2 hover:text-[#2451B8] transition-colors" @click="closeMobileMenu">About</a></li>
-          <li><a href="#skills" class="block py-2 hover:text-[#2451B8] transition-colors" @click="closeMobileMenu">Skills</a></li>
-          <li><a href="#education" class="block py-2 hover:text-[#2451B8] transition-colors" @click="closeMobileMenu">Education</a></li>
-          <li><a href="#experience" class="block py-2 hover:text-[#2451B8] transition-colors" @click="closeMobileMenu">Experience</a></li>
-          <li><a href="#projects" class="block py-2 hover:text-[#2451B8] transition-colors" @click="closeMobileMenu">Projects</a></li>
-          <li><a href="#contact" class="block py-2 hover:text-[#2451B8] transition-colors" @click="closeMobileMenu">Contact</a></li>
-        </ul>
-      </div>
+      <transition
+        enter-active-class="transition duration-200 ease-out"
+        enter-from-class="opacity-0 -translate-y-2"
+        enter-to-class="opacity-100 translate-y-0"
+        leave-active-class="transition duration-150 ease-in"
+        leave-from-class="opacity-100 translate-y-0"
+        leave-to-class="opacity-0 -translate-y-2"
+      >
+        <div v-if="mobileMenuOpen" class="md:hidden bg-white py-4 px-4 border-t border-[#E3E6EA] shadow-lg">
+          <ul class="space-y-1 text-[#475467] font-medium">
+            <li><a href="#about" class="block py-3 px-2 rounded-lg hover:bg-[#F7F8FA] hover:text-[#2451B8] transition-colors" @click="closeMobileMenu">About</a></li>
+            <li><a href="#skills" class="block py-3 px-2 rounded-lg hover:bg-[#F7F8FA] hover:text-[#2451B8] transition-colors" @click="closeMobileMenu">Skills</a></li>
+            <li><a href="#education" class="block py-3 px-2 rounded-lg hover:bg-[#F7F8FA] hover:text-[#2451B8] transition-colors" @click="closeMobileMenu">Education</a></li>
+            <li><a href="#experience" class="block py-3 px-2 rounded-lg hover:bg-[#F7F8FA] hover:text-[#2451B8] transition-colors" @click="closeMobileMenu">Experience</a></li>
+            <li><a href="#projects" class="block py-3 px-2 rounded-lg hover:bg-[#F7F8FA] hover:text-[#2451B8] transition-colors" @click="closeMobileMenu">Projects</a></li>
+            <li><a href="#contact" class="block py-3 px-2 rounded-lg hover:bg-[#F7F8FA] hover:text-[#2451B8] transition-colors" @click="closeMobileMenu">Contact</a></li>
+          </ul>
+        </div>
+      </transition>
     </header>
 
     <!-- Hero Section -->
     <section class="max-w-6xl mx-auto px-4 py-12 md:py-24">
       <div class="grid md:grid-cols-5 gap-10 md:gap-12 items-center">
-        <div class="order-2 md:order-1 md:col-span-3 text-center md:text-left" data-aos="fade-right">
+        <div class="order-2 md:order-1 md:col-span-3 text-center md:text-left" data-aos="fade-up">
           <p class="text-[#E76F51] font-semibold mb-3 text-sm md:text-base">Fullstack Developer</p>
           <h2 class="font-['Sora'] text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-5 md:mb-6">
             Hi, I'm Ariel — I build practical web systems that get work done.
@@ -53,23 +66,29 @@
             internal systems for companies.
           </p>
           <div class="flex flex-col sm:flex-row sm:flex-wrap gap-3 items-stretch sm:items-center justify-center md:justify-start">
-            <a href="#projects" class="px-5 py-3 bg-[#101828] text-white rounded-lg font-medium hover:bg-[#2451B8] transition-all duration-300 flex items-center justify-center gap-2">
+            <a href="#projects" class="min-h-[44px] px-5 py-3 bg-[#101828] text-white rounded-lg font-medium hover:bg-[#2451B8] transition-all duration-300 flex items-center justify-center gap-2">
               <i class="fas fa-arrow-down text-sm"></i> View Work
             </a>
-            <a href="/files/cvariel.pdf" download class="px-5 py-3 border border-[#D0D5DD] text-[#101828] rounded-lg font-medium hover:border-[#2451B8] hover:text-[#2451B8] transition-all duration-300 flex items-center justify-center gap-2">
+            <a href="/files/cvariel.pdf" download class="min-h-[44px] px-5 py-3 border border-[#D0D5DD] text-[#101828] rounded-lg font-medium hover:border-[#2451B8] hover:text-[#2451B8] transition-all duration-300 flex items-center justify-center gap-2">
               <i class="fas fa-file-pdf text-sm"></i> Download CV
             </a>
-            <a href="#contact" class="px-5 py-3 text-[#475467] rounded-lg font-medium hover:text-[#2451B8] transition-all duration-300 flex items-center justify-center gap-2">
+            <a href="#contact" class="min-h-[44px] px-5 py-3 text-[#475467] rounded-lg font-medium hover:text-[#2451B8] transition-all duration-300 flex items-center justify-center gap-2">
               <i class="fas fa-envelope text-sm"></i> Contact Me
             </a>
           </div>
         </div>
 
-        <div class="order-1 md:order-2 md:col-span-2 flex justify-center" data-aos="fade-left">
+        <div class="order-1 md:order-2 md:col-span-2 flex justify-center" data-aos="fade-up">
           <div class="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64">
             <div class="absolute -inset-2.5 md:-inset-3 rounded-[2rem] bg-[#FBEEE9] -z-10"></div>
-            <div class="w-full h-full rounded-[1.75rem] overflow-hidden border border-[#E3E6EA] shadow-sm">
-              <img src="/images/myfoto.jpeg" alt="Ariel Photo" class="w-full h-full object-cover">
+            <div class="w-full h-full rounded-[1.75rem] overflow-hidden border border-[#E3E6EA] shadow-sm bg-[#F7F8FA]">
+              <img
+                src="/images/myfoto.jpeg"
+                alt="Ariel Photo"
+                loading="eager"
+                class="w-full h-full object-cover"
+                @load="$emit('img-loaded')"
+              >
             </div>
           </div>
         </div>
@@ -77,25 +96,24 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="max-w-5xl mx-auto py-12 md:py-16 px-4" data-aos="fade-up">
-      <div class="mb-8 md:mb-10">
-        <!-- <p class="text-[#2451B8] font-semibold text-sm tracking-wide mb-2">About</p> -->
+    <section id="about" class="max-w-5xl mx-auto py-12 md:py-16 px-4 scroll-mt-20">
+      <div class="mb-8 md:mb-10" data-aos="fade-up">
         <h3 class="text-2xl md:text-3xl font-['Sora'] font-bold">About Me</h3>
       </div>
-      <div class="flex flex-col md:flex-row gap-6 md:gap-10 items-start">
-        <div class="md:w-1/3">
-          <div class="w-full aspect-square rounded-2xl overflow-hidden border border-[#E3E6EA]">
-            <img src="/images/fotoku.jpeg" alt="Ariel Photo" class="w-full h-full object-cover">
+      <div class="flex flex-col md:flex-row gap-6 md:gap-10 items-start" data-aos="fade-up" data-aos-delay="100">
+        <div class="md:w-1/3 w-full">
+          <div class="w-full aspect-square rounded-2xl overflow-hidden border border-[#E3E6EA] bg-[#F7F8FA]">
+            <img src="/images/fotoku.jpeg" alt="Ariel Photo" loading="lazy" class="w-full h-full object-cover">
           </div>
         </div>
         <div class="md:w-2/3">
-          <p class="text-lg leading-relaxed mb-6 text-[#344054]">
+          <p class="text-base md:text-lg leading-relaxed mb-6 text-[#344054]">
             As an Informatics Engineering graduate from Sebelas Maret University, I have a strong foundation in
             software development and a passion for building impactful web applications. I am passionate about
             translating conceptual ideas into real-world products, with a keen focus on performance, clean
             code, and an intuitive user experience.
           </p>
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div class="flex items-center gap-2">
               <i class="fas fa-check text-[#2451B8]"></i>
               <span>Team Communication</span>
@@ -118,15 +136,15 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="bg-[#F7F8FA] py-12 md:py-16 px-4">
-      <div class="max-w-5xl mx-auto" data-aos="fade-up">
-        <div class="mb-8 md:mb-10">
+    <section id="skills" class="bg-[#F7F8FA] py-12 md:py-16 px-4 scroll-mt-20">
+      <div class="max-w-5xl mx-auto">
+        <div class="mb-8 md:mb-10" data-aos="fade-up">
           <p class="text-[#2451B8] font-semibold text-sm tracking-wide mb-2">Skills</p>
           <h3 class="text-2xl md:text-3xl font-['Sora'] font-bold">What I Work With</h3>
         </div>
         <div class="grid md:grid-cols-2 gap-8 md:gap-12">
           <!-- Technical Skills -->
-          <div>
+          <div data-aos="fade-up" data-aos-delay="100">
             <h4 class="text-lg font-semibold mb-6 flex items-center gap-2 text-[#344054]">
               <i class="fas fa-laptop-code text-[#2451B8]"></i>
               Technical Skills
@@ -136,7 +154,7 @@
                 <div class="flex items-center justify-between mb-1.5">
                   <div class="flex items-center gap-3">
                     <div class="w-6 h-6 flex items-center justify-center">
-                      <img :src="skill.icon" :alt="skill.name + ' icon'" class="w-5 h-5 object-contain">
+                      <img :src="skill.icon" :alt="skill.name + ' icon'" loading="lazy" class="w-5 h-5 object-contain">
                     </div>
                     <span class="font-medium text-sm">{{ skill.name }}</span>
                   </div>
@@ -150,7 +168,7 @@
           </div>
 
           <!-- Professional Skills -->
-          <div>
+          <div data-aos="fade-up" data-aos-delay="200">
             <h4 class="text-lg font-semibold mb-6 flex items-center gap-2 text-[#344054]">
               <i class="fas fa-user-tie text-[#E76F51]"></i>
               Professional Skills
@@ -172,15 +190,15 @@
     </section>
 
     <!-- Education Section -->
-    <section id="education" class="py-12 md:py-16 px-4">
-      <div class="max-w-5xl mx-auto" data-aos="fade-up">
-        <div class="mb-8 md:mb-10">
+    <section id="education" class="py-12 md:py-16 px-4 scroll-mt-20">
+      <div class="max-w-5xl mx-auto">
+        <div class="mb-8 md:mb-10" data-aos="fade-up">
           <h3 class="text-2xl md:text-3xl font-['Sora'] font-bold">Education</h3>
         </div>
-        <div class="border border-[#E3E6EA] rounded-2xl p-6 hover:border-[#2451B8]/40 transition-all duration-300">
+        <div class="border border-[#E3E6EA] rounded-2xl p-6 hover:border-[#2451B8]/40 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
           <div class="flex flex-col md:flex-row items-center gap-6">
             <div class="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#F7F8FA] flex items-center justify-center">
-              <img src="/images/Logo-UNS.png" alt="UNS Logo" class="w-16 h-16 md:w-20 md:h-20 object-contain">
+              <img src="/images/Logo-UNS.png" alt="UNS Logo" loading="lazy" class="w-16 h-16 md:w-20 md:h-20 object-contain">
             </div>
             <div class="flex-1 text-center md:text-left">
               <h4 class="text-xl md:text-2xl font-semibold mb-2">Sebelas Maret University</h4>
@@ -202,7 +220,7 @@
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="bg-[#F7F8FA] py-12 md:py-16 px-4">
+    <section id="experience" class="bg-[#F7F8FA] py-12 md:py-16 px-4 scroll-mt-20">
       <div class="max-w-4xl mx-auto">
         <div class="mb-8 md:mb-12" data-aos="fade-up">
           <p class="text-[#2451B8] font-semibold text-sm tracking-wide mb-2">Experience</p>
@@ -217,18 +235,18 @@
             :key="index"
             class="relative mb-10 last:mb-0"
             data-aos="fade-up"
-            :data-aos-delay="index * 100"
+            :data-aos-delay="index * 80"
           >
             <div class="absolute -left-8 top-1.5 w-4 h-4 rounded-full bg-white border-2 border-[#2451B8]"></div>
 
-            <div class="bg-white border border-[#E3E6EA] rounded-xl p-6 hover:border-[#2451B8]/40 transition-all duration-300">
-              <div class="flex items-center gap-4 mb-4">
+            <div class="bg-white border border-[#E3E6EA] rounded-xl p-5 sm:p-6 hover:border-[#2451B8]/40 transition-all duration-300">
+              <div class="flex items-start sm:items-center gap-4 mb-4">
                 <div class="w-12 h-12 rounded-full bg-[#F7F8FA] flex items-center justify-center overflow-hidden shrink-0">
-                  <img v-if="exp.logo" :src="exp.logo" :alt="exp.company + ' logo'" class="w-8 h-8 object-contain">
+                  <img v-if="exp.logo" :src="exp.logo" :alt="exp.company + ' logo'" loading="lazy" class="w-8 h-8 object-contain">
                   <i v-else :class="exp.icon || 'fas fa-briefcase'" class="text-[#2451B8] text-lg"></i>
                 </div>
-                <div>
-                  <h4 class="text-lg font-semibold">{{ exp.title }}</h4>
+                <div class="min-w-0">
+                  <h4 class="text-base sm:text-lg font-semibold leading-tight">{{ exp.title }}</h4>
                   <p class="text-[#2451B8] font-medium text-sm">{{ exp.company }}</p>
                 </div>
               </div>
@@ -242,7 +260,7 @@
 
               <ul class="space-y-2">
                 <li v-for="(achievement, i) in exp.achievements" :key="i" class="flex items-start gap-2 text-sm">
-                  <i class="fas fa-check text-[#2451B8] mt-1 text-xs"></i>
+                  <i class="fas fa-check text-[#2451B8] mt-1 text-xs shrink-0"></i>
                   <span class="text-[#475467]">{{ achievement }}</span>
                 </li>
               </ul>
@@ -253,28 +271,28 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-12 md:py-16 px-4">
+    <section id="projects" class="py-12 md:py-16 px-4 scroll-mt-20">
       <div class="max-w-6xl mx-auto">
         <div class="mb-8 md:mb-10" data-aos="fade-up">
           <p class="text-[#2451B8] font-semibold text-sm tracking-wide mb-2">Projects</p>
           <h3 class="text-2xl md:text-3xl font-['Sora'] font-bold">Selected Work</h3>
         </div>
-        
-        <!-- Mengubah grid menjadi 2 kolom di layar menengah/besar -->
-        <div class="grid md:grid-cols-3 gap-6">
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           <div
             v-for="(project, index) in projects"
             :key="index"
             class="bg-white border border-[#E3E6EA] rounded-2xl overflow-hidden hover:shadow-md hover:border-[#2451B8]/30 transition-all duration-300 group flex flex-col"
             data-aos="fade-up"
-            :data-aos-delay="(index + 1) * 100"
+            :data-aos-delay="(index % 3) * 80"
           >
             <!-- Bagian Gambar / Gradient Placeholder -->
-            <div class="h-48 relative overflow-hidden border-b border-[#E3E6EA]">
+            <div class="aspect-video relative overflow-hidden border-b border-[#E3E6EA] bg-[#F7F8FA]">
               <img
                 v-if="project.useImage"
                 :src="project.image"
                 :alt="project.title"
+                loading="lazy"
                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               >
               <div v-else class="absolute inset-0 flex items-center justify-center" :class="project.gradient">
@@ -283,32 +301,31 @@
             </div>
 
             <!-- Bagian Konten Teks -->
-            <div class="p-6 flex-1 flex flex-col">
-              <h4 class="font-bold text-lg mb-2">{{ project.title }}</h4>
-              <p class="text-[#667085] mb-6 flex-1 text-sm leading-relaxed">{{ project.description }}</p>
-              
+            <div class="p-5 md:p-6 flex-1 flex flex-col">
+              <h4 class="font-bold text-base md:text-lg mb-2">{{ project.title }}</h4>
+              <p class="text-[#667085] mb-4 flex-1 text-sm leading-relaxed">{{ project.description }}</p>
+
               <!-- Tags Teknologi -->
               <div class="flex flex-wrap gap-2 mt-auto">
-                <span v-for="(tech, techIndex) in project.technologies" :key="techIndex" class="px-3 py-1 text-xs rounded-full border" :class="tech.color">
+                <span v-for="(tech, techIndex) in project.technologies" :key="techIndex" class="px-2.5 py-1 text-xs rounded-full border" :class="tech.color">
                   {{ tech.name }}
                 </span>
               </div>
             </div>
           </div>
         </div>
-        
       </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="bg-[#F7F8FA] py-12 md:py-16 px-4" data-aos="fade-up">
+    <section id="contact" class="bg-[#F7F8FA] py-12 md:py-16 px-4 scroll-mt-20">
       <div class="max-w-5xl mx-auto">
-        <div class="mb-8 md:mb-10">
+        <div class="mb-8 md:mb-10" data-aos="fade-up">
           <p class="text-[#2451B8] font-semibold text-sm tracking-wide mb-2">Contact</p>
           <h3 class="text-2xl md:text-3xl font-['Sora'] font-bold">Let's Work Together</h3>
         </div>
         <div class="grid md:grid-cols-2 gap-8 md:gap-12">
-          <div>
+          <div data-aos="fade-up">
             <p class="text-[#667085] mb-6">
               Feel free to reach out if you're looking for a developer, have a question, or just want to connect.
             </p>
@@ -316,15 +333,13 @@
               <a
                 :href="`mailto:${contactInfo.email}`"
                 class="flex items-center gap-3 p-3 rounded-lg bg-white border border-[#E3E6EA] hover:border-[#2451B8] transition-all duration-300 cursor-pointer group"
-                data-aos="fade-right"
-                data-aos-delay="100"
               >
-                <div class="w-10 h-10 rounded-full bg-[#EEF2FB] flex items-center justify-center">
+                <div class="w-10 h-10 rounded-full bg-[#EEF2FB] flex items-center justify-center shrink-0">
                   <i class="fas fa-envelope text-[#2451B8]"></i>
                 </div>
-                <div>
+                <div class="min-w-0">
                   <p class="font-medium text-sm">Email</p>
-                  <p class="text-[#667085] group-hover:text-[#2451B8] transition-colors text-sm">{{ contactInfo.email }}</p>
+                  <p class="text-[#667085] group-hover:text-[#2451B8] transition-colors text-sm truncate">{{ contactInfo.email }}</p>
                 </div>
               </a>
 
@@ -333,27 +348,21 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 class="flex items-center gap-3 p-3 rounded-lg bg-white border border-[#E3E6EA] hover:border-[#22A06B] transition-all duration-300 cursor-pointer group"
-                data-aos="fade-right"
-                data-aos-delay="200"
               >
-                <div class="w-10 h-10 rounded-full bg-[#E7F6EF] flex items-center justify-center">
+                <div class="w-10 h-10 rounded-full bg-[#E7F6EF] flex items-center justify-center shrink-0">
                   <i class="fab fa-whatsapp text-[#22A06B]"></i>
                 </div>
-                <div>
+                <div class="min-w-0">
                   <p class="font-medium text-sm">Phone / WhatsApp</p>
                   <p class="text-[#667085] group-hover:text-[#22A06B] transition-colors text-sm">{{ contactInfo.phone }}</p>
                 </div>
               </a>
 
-              <div
-                class="flex items-center gap-3 p-3 rounded-lg bg-white border border-[#E3E6EA]"
-                data-aos="fade-right"
-                data-aos-delay="300"
-              >
-                <div class="w-10 h-10 rounded-full bg-[#EEF2FB] flex items-center justify-center">
+              <div class="flex items-center gap-3 p-3 rounded-lg bg-white border border-[#E3E6EA]">
+                <div class="w-10 h-10 rounded-full bg-[#EEF2FB] flex items-center justify-center shrink-0">
                   <i class="fas fa-map-marker-alt text-[#2451B8]"></i>
                 </div>
-                <div>
+                <div class="min-w-0">
                   <p class="font-medium text-sm">Location</p>
                   <p class="text-[#667085] text-sm">{{ contactInfo.location }}</p>
                 </div>
@@ -361,14 +370,12 @@
             </div>
           </div>
 
-          <form @submit.prevent="submitContactForm" class="grid gap-4">
+          <form @submit.prevent="submitContactForm" class="grid gap-4" data-aos="fade-up" data-aos-delay="100">
             <input
               v-model="contactForm.name"
               type="text"
               placeholder="Your Name"
-              class="bg-white border border-[#D0D5DD] p-3 rounded-lg w-full focus:ring-2 focus:ring-[#2451B8] focus:border-transparent transition-all"
-              data-aos="fade-left"
-              data-aos-delay="100"
+              class="bg-white border border-[#D0D5DD] p-3 rounded-lg w-full focus:ring-2 focus:ring-[#2451B8] focus:border-transparent transition-all min-h-[44px]"
               :disabled="isSending"
               required
             >
@@ -376,9 +383,7 @@
               v-model="contactForm.email"
               type="email"
               placeholder="Your Email"
-              class="bg-white border border-[#D0D5DD] p-3 rounded-lg w-full focus:ring-2 focus:ring-[#2451B8] focus:border-transparent transition-all"
-              data-aos="fade-left"
-              data-aos-delay="200"
+              class="bg-white border border-[#D0D5DD] p-3 rounded-lg w-full focus:ring-2 focus:ring-[#2451B8] focus:border-transparent transition-all min-h-[44px]"
               :disabled="isSending"
               required
             >
@@ -386,9 +391,7 @@
               v-model="contactForm.message"
               placeholder="Your Message"
               rows="5"
-              class="bg-white border border-[#D0D5DD] p-3 rounded-lg w-full focus:ring-2 focus:ring-[#2451B8] focus:border-transparent transition-all"
-              data-aos="fade-left"
-              data-aos-delay="300"
+              class="bg-white border border-[#D0D5DD] p-3 rounded-lg w-full focus:ring-2 focus:ring-[#2451B8] focus:border-transparent transition-all resize-none"
               :disabled="isSending"
               required
             ></textarea>
@@ -396,9 +399,7 @@
             <button
               type="submit"
               :disabled="isSending"
-              class="px-6 py-3 bg-[#101828] text-white rounded-lg font-medium hover:bg-[#2451B8] transition-all flex items-center justify-center gap-2 disabled:bg-[#98A2B3] disabled:cursor-not-allowed"
-              data-aos="zoom-in"
-              data-aos-delay="400"
+              class="min-h-[44px] px-6 py-3 bg-[#101828] text-white rounded-lg font-medium hover:bg-[#2451B8] transition-all flex items-center justify-center gap-2 disabled:bg-[#98A2B3] disabled:cursor-not-allowed"
             >
               <i v-if="isSending" class="fas fa-spinner fa-spin"></i>
               <i v-else class="fas fa-paper-plane"></i>
@@ -412,7 +413,7 @@
     <!-- Footer -->
     <footer class="bg-[#101828] py-8 mt-auto">
       <div class="max-w-6xl mx-auto px-4">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
           <div class="flex items-baseline gap-2.5">
             <span class="font-['Sora'] text-lg font-bold tracking-tight text-white">
               Ariel<span class="text-[#E76F51]">.</span>
@@ -422,7 +423,7 @@
             </span>
           </div>
           <div class="flex gap-6">
-            <a v-for="(social, index) in socialLinks" :key="index" :href="social.url" class="text-[#98A2B3] hover:text-white transition-colors" target="_blank" rel="noopener">
+            <a v-for="(social, index) in socialLinks" :key="index" :href="social.url" class="text-[#98A2B3] hover:text-white transition-colors p-1" target="_blank" rel="noopener">
               <i :class="social.icon" class="text-xl"></i>
             </a>
           </div>
@@ -529,57 +530,57 @@ export default {
       ],
       projects: [
         {
-    title: 'Portal Website Boltz',
-    description: 'Official website of PT. Boltz Indonesia serving as a public information hub and gateway to internal applications.',
-    gradient: 'bg-gradient-to-r from-teal-500 to-emerald-600',
-    useImage: true, // Ubah ke true jika ada screenshot
-    image: '/images/portalboltz.png',
-    icon: 'fas fa-globe',
-    technologies: [
-      { name: 'Laravel', color: 'bg-[#EEF2FB] text-[#2451B8] border-[#D6E0F5]' },
-      { name: 'Tailwind CSS', color: 'bg-[#E7F6EF] text-[#22A06B] border-[#CDEEDD]' },
-      { name: 'MySQL', color: 'bg-[#FBEEE9] text-[#E76F51] border-[#F5D9CC]' }
-    ]
-  },
-  {
-    title: 'Attendance System',
-    description: 'A web-based employee attendance management system. Integrates data from tap in/out machines, manages monthly recaps, overtime, work calendars, and centralized attendance reporting.',
-    gradient: 'bg-gradient-to-r from-blue-500 to-indigo-600',
-    useImage: true,
-    image: '/images/attendance-boltz.png',
-    icon: 'fas fa-user-clock',
-    technologies: [
-      { name: 'Laravel', color: 'bg-[#EEF2FB] text-[#2451B8] border-[#D6E0F5]' },
-      { name: 'Chart.js', color: 'bg-[#FDF2FA] text-[#C11574] border-[#FCCEEE]' },
-      { name: 'REST API', color: 'bg-[#F0F9FF] text-[#026AA2] border-[#B9E6FE]' }
-    ]
-  },
-  {
-    title: 'Employee Self Service (ESS)',
-    description: 'A centralized digital employee data management system. Manages worker data, identity documents, medical benefits, family data, interns, as well as Kaizen management with a reward feature.',
-    gradient: 'bg-gradient-to-r from-orange-400 to-rose-500',
-    useImage: true,
-    image: '/images/ess-boltz.png',
-    icon: 'fas fa-users-cog',
-    technologies: [
-      { name: 'Laravel', color: 'bg-[#EEF2FB] text-[#2451B8] border-[#D6E0F5]' },
-      { name: 'Bootstrap 5', color: 'bg-[#F3E8FF] text-[#6941C6] border-[#E4D7FF]' },
-      { name: 'REST API', color: 'bg-[#F0F9FF] text-[#026AA2] border-[#B9E6FE]' }
-    ]
-  },
-  {
-    title: 'Consumable Control System (CCS)',
-    description: 'A digital consumable inventory management system. Manages stock, inbound/outbound transactions via QR Code, inter-section requests, and usage recaps.',
-    gradient: 'bg-gradient-to-r from-pink-500 to-rose-600',
-    useImage: true,
-    image: '/images/ccs-boltz.png',
-    icon: 'fas fa-qrcode',
-    technologies: [
-      { name: 'Laravel', color: 'bg-[#EEF2FB] text-[#2451B8] border-[#D6E0F5]' },
-      { name: 'QR Code API', color: 'bg-[#FDF2FA] text-[#C11574] border-[#FCCEEE]' },
-      { name: 'PHPSpreadsheet', color: 'bg-[#E7F6EF] text-[#22A06B] border-[#CDEEDD]' }
-    ]
-  },
+          title: 'Portal Website Boltz',
+          description: 'Official website of PT. Boltz Indonesia serving as a public information hub and gateway to internal applications.',
+          gradient: 'bg-gradient-to-r from-teal-500 to-emerald-600',
+          useImage: true,
+          image: '/images/portalboltz.png',
+          icon: 'fas fa-globe',
+          technologies: [
+            { name: 'Laravel', color: 'bg-[#EEF2FB] text-[#2451B8] border-[#D6E0F5]' },
+            { name: 'Tailwind CSS', color: 'bg-[#E7F6EF] text-[#22A06B] border-[#CDEEDD]' },
+            { name: 'MySQL', color: 'bg-[#FBEEE9] text-[#E76F51] border-[#F5D9CC]' }
+          ]
+        },
+        {
+          title: 'Attendance System',
+          description: 'A web-based employee attendance management system. Integrates data from tap in/out machines, manages monthly recaps, overtime, work calendars, and centralized attendance reporting.',
+          gradient: 'bg-gradient-to-r from-blue-500 to-indigo-600',
+          useImage: true,
+          image: '/images/attendance-boltz.png',
+          icon: 'fas fa-user-clock',
+          technologies: [
+            { name: 'Laravel', color: 'bg-[#EEF2FB] text-[#2451B8] border-[#D6E0F5]' },
+            { name: 'Chart.js', color: 'bg-[#FDF2FA] text-[#C11574] border-[#FCCEEE]' },
+            { name: 'REST API', color: 'bg-[#F0F9FF] text-[#026AA2] border-[#B9E6FE]' }
+          ]
+        },
+        {
+          title: 'Employee Self Service (ESS)',
+          description: 'A centralized digital employee data management system. Manages worker data, identity documents, medical benefits, family data, interns, as well as Kaizen management with a reward feature.',
+          gradient: 'bg-gradient-to-r from-orange-400 to-rose-500',
+          useImage: true,
+          image: '/images/ess-boltz.png',
+          icon: 'fas fa-users-cog',
+          technologies: [
+            { name: 'Laravel', color: 'bg-[#EEF2FB] text-[#2451B8] border-[#D6E0F5]' },
+            { name: 'Bootstrap 5', color: 'bg-[#F3E8FF] text-[#6941C6] border-[#E4D7FF]' },
+            { name: 'REST API', color: 'bg-[#F0F9FF] text-[#026AA2] border-[#B9E6FE]' }
+          ]
+        },
+        {
+          title: 'Consumable Control System (CCS)',
+          description: 'A digital consumable inventory management system. Manages stock, inbound/outbound transactions via QR Code, inter-section requests, and usage recaps.',
+          gradient: 'bg-gradient-to-r from-pink-500 to-rose-600',
+          useImage: true,
+          image: '/images/ccs-boltz.png',
+          icon: 'fas fa-qrcode',
+          technologies: [
+            { name: 'Laravel', color: 'bg-[#EEF2FB] text-[#2451B8] border-[#D6E0F5]' },
+            { name: 'QR Code API', color: 'bg-[#FDF2FA] text-[#C11574] border-[#FCCEEE]' },
+            { name: 'PHPSpreadsheet', color: 'bg-[#E7F6EF] text-[#22A06B] border-[#CDEEDD]' }
+          ]
+        },
         {
           title: 'Jababeka Learning',
           description: 'Learning Management System (LMS) based on Laravel & Vue.js to manage training, certifications, and training recommendations at PT Jababeka Tbk.',
@@ -587,8 +588,6 @@ export default {
           useImage: true,
           image: '/images/lms.png',
           icon: 'fas fa-laptop-code',
-          githubUrl: 'https://github.com/arielfajar/lms_jababeka.git',
-          demoUrl: 'https://jababekalearning.com',
           technologies: [
             { name: 'Laravel', color: 'bg-[#EEF2FB] text-[#2451B8] border-[#D6E0F5]' },
             { name: 'Vue.js', color: 'bg-[#E7F6EF] text-[#22A06B] border-[#CDEEDD]' },
@@ -602,7 +601,6 @@ export default {
           useImage: true,
           image: '/images/purchasing.png',
           icon: 'fas fa-shopping-cart',
-          githubUrl: 'https://github.com/arielfajar/purchasing_jababeka.git',
           technologies: [
             { name: 'Laravel', color: 'bg-[#EEF2FB] text-[#2451B8] border-[#D6E0F5]' },
             { name: 'AJAX', color: 'bg-[#E7F6EF] text-[#22A06B] border-[#CDEEDD]' },
@@ -616,7 +614,6 @@ export default {
           useImage: true,
           image: '/images/budget.png',
           icon: 'fas fa-chart-line',
-          githubUrl: 'https://github.com/arielfajar/budgeting_jababeka.git',
           technologies: [
             { name: 'Java', color: 'bg-[#EEF2FB] text-[#2451B8] border-[#D6E0F5]' },
             { name: 'GUI', color: 'bg-[#FDECEC] text-[#D92D20] border-[#F9D5D5]' },
@@ -642,14 +639,32 @@ export default {
     }
   },
   mounted() {
+    // Konfigurasi AOS yang lebih stabil untuk mobile
     AOS.init({
-      duration: 700,
-      offset: 100
+      duration: 600,
+      easing: 'ease-out-cubic',
+      once: true,           // animasi hanya sekali (tidak reset saat scroll balik)
+      mirror: false,
+      offset: 80,           // jarak trigger dari bawah viewport
+      anchorPlacement: 'top-bottom',
+      disable: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    });
+
+    // Refresh AOS setelah gambar & layout selesai dimuat (fix animasi tidak muncul di HP)
+    window.addEventListener('load', () => AOS.refresh());
+    // Refresh lagi jika ada resize/orientation change (misal rotate HP)
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => AOS.refresh(), 200);
     });
 
     window.addEventListener('scroll', this.handleScroll);
     this.animateSkillBars();
     emailjs.init("eTFDsabna1YryLWcv");
+
+    // Refresh AOS setelah mount agar elemen dinamis (v-for) terdeteksi
+    this.$nextTick(() => AOS.refresh());
   },
   beforeUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
@@ -657,7 +672,7 @@ export default {
   methods: {
     handleScroll() {
       const sections = ['about', 'skills', 'education', 'experience', 'projects', 'contact'];
-      const scrollPosition = window.scrollY + 100;
+      const scrollPosition = window.scrollY + 120;
 
       for (const section of sections) {
         const element = document.getElementById(section);
@@ -684,9 +699,10 @@ export default {
                 bar.style.width = width;
               }, 200);
             });
+            observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.5 });
+      }, { threshold: 0.3 });
 
       const skillsSection = document.getElementById('skills');
       if (skillsSection) {
@@ -721,7 +737,7 @@ export default {
 
         await emailjs.send(
           'service_sa69l58',
-          '  ',
+          'template_ycyzcwy', // ⚠️ Ganti dengan template ID Anda yang benar!
           templateParams,
           'eTFDsabna1YryLWcv'
         );
@@ -747,7 +763,7 @@ export default {
 
     showNotification(message, type) {
       const notification = document.createElement('div');
-      notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 transform transition-all duration-300 max-w-sm bg-white text-[#101828] ${
+      notification.className = `fixed top-20 md:top-4 right-4 left-4 md:left-auto p-4 rounded-lg shadow-lg z-[100] transform transition-all duration-300 max-w-sm mx-auto md:mx-0 bg-white text-[#101828] ${
         type === 'success' ? 'border-l-4 border-[#22A06B]' : 'border-l-4 border-[#D92D20]'
       }`;
 
@@ -780,9 +796,13 @@ export default {
 
 :global(html) {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+:global(body) {
+  overflow-x: hidden;
 }
 section[id] {
-  scroll-margin-top: 4.5rem;
+  scroll-margin-top: 5rem;
 }
 
 .skill-bar {
@@ -799,5 +819,19 @@ section[id] {
 .nav-link.active {
   color: #2451B8;
   font-weight: 600;
+}
+
+/* Fallback: jika JS AOS gagal load, elemen tetap terlihat */
+[data-aos] {
+  pointer-events: auto;
+}
+[data-aos]:not(.aos-animate) {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+[data-aos].aos-animate {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>
